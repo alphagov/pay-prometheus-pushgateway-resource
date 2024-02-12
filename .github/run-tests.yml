@@ -1,0 +1,30 @@
+name: Github Actions Tests
+
+on:
+  workflow_call:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  detect-secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+      - name: Detect secrets
+        uses: alphagov/pay-ci/actions/detect-secrets@master
+
+  tests:
+    name: Docker build and test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+      - name: Build dockerfile (includes executing tests)
+        run: |
+          set -euo pipefail
+
+          # Note: The docker build includes executing the tests as part of the build
+          docker build -t test .
