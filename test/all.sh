@@ -73,3 +73,8 @@ test 'metric_with_env_vars' | jq -e "
     .pushgw_url == $(echo 'http://pushgw:9091' | jq -R .) and
     .body == \"${expected_body}\" and
     .job == $(echo 'metric_with_env_vars' | jq -R .)"
+
+test 'job_with_env_vars' | jq -e "
+    .pushgw_url == $(echo 'http://pushgw:9091' | jq -R .) and
+    .body == $(echo 'simple_metric 0' | jq -R .) and
+    .job == $(echo 'simple_metric/pipeline/my-pipeline' | jq -R .)"

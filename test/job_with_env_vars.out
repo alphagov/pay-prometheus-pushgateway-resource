@@ -1,0 +1,11 @@
+{
+  "source": {
+    "url": "http://pushgw:9091",
+    "job": "simple_metric/pipeline/$BUILD_PIPELINE_NAME",
+    "debug": "true"
+  },
+  "params": {
+    "metric": "simple_metric",
+    "value": 0
+  }
+}
