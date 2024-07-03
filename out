@@ -53,7 +53,7 @@ EOF
     )"
 else
     echo "Metric sent to Pushgateway: '${body}'" >&2
-    echo "${body}" | curl --data-binary @- "${pushgw_url}/metrics/job/${job}"
+    echo "${body}" | curl --fail-with-body --data-binary @- "${pushgw_url}/metrics/job/${job}"
 fi
 
 timestamp="$(jq -n "{version:{timestamp:\"$(date +%s)\"}}")"
